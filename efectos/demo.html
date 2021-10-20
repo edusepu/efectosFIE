@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<title>jQuery Zoom Demo</title>
+	<link href="css/style.css" rel="stylesheet">
+	<style>
+		#padre {
+		  overflow-x: visible;
+		  white-space: nowrap;
+	
+		}
+	
+	
+		#hijo {
+		  left: 0;
+		  position: fixed;
+		  overflow: visible;
+		  -moz-transform-origin: top left;
+		  -ms-transform-origin: top left;
+		  -o-transform-origin: top left;
+		  -webkit-transform-origin: top left;
+		  transform-origin: top left;
+		  -moz-transition: all .2s ease-in-out;
+		  -o-transition: all .2s ease-in-out;
+		  -webkit-transition: all .2s ease-in-out;
+		  transition: all .2s ease-in-out;
+		}
+	  </style>
+	<style>
+		/* styles unrelated to zoom */
+		* { border:0; margin:0; padding:0; }
+		p { position:absolute; top:3px; right:28px; color:#555; font:bold 13px/1 sans-serif;}
+
+		/* these styles are for the demo, but are not required for the plugin */
+		.zoom {
+			display:inline-block;
+			position: relative;
+		}
+		
+		/* magnifying glass icon */
+		.zoom:after {
+			content:'';
+			display:block; 
+			width:33px; 
+			height:33px; 
+			position:absolute; 
+			top:0;
+			right:0;
+			background:url(icon.png);
+		}
+
+		.zoom img {
+			display: block;
+		}
+
+		.zoom img::selection { background-color: transparent; }
+
+		#ex2 img:hover { cursor: url(grab.cur), default; }
+		#ex2 img:active { cursor: url(grabbed.cur), default; }
+	</style>
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+	<script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/scripts.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src='zoom/jquery.zoom.js'></script>
+	<script>
+		$(document).ready(function(){
+			$('#ex1').zoom();
+			$('#ex2').zoom({ on:'grab' });
+			$('#ex3').zoom({ on:'click' });			 
+			$('#ex4').zoom({ on:'toggle' });
+		});
+	</script>
+</head>
+<body>
+	<span class='zoom' id='ex1'>
+		<div>
+			<img src="planos/PB/PB.png" width='1000' usemap="#image-map">
+
+			<map name="image-map">
+			  <area target="_blank" alt="HALL" title="HALL" href="google.com" coords="2367,2480,2735,2689"
+				shape="rect">
+			  <area target="_blank" alt="Oficina" title="Oficina" href="facebook.com" coords="2702,2742,128"
+				shape="circle">
+			</map>
+		  </div>
+		<p>Hover</p>
+	</span>
+	
+</body>
+</html>
+<script>
+
+	$(document).ready(function () {
+  
+  
+	  var width = document.getElementById('hijo').offsetWidth;
+	  var height = document.getElementById('hijo').offsetHeight;
+	  var windowWidth = $(document).outerWidth();
+	  var windowHeight = $(document).outerHeight();
+	  var r = 1;
+	  r = Math.min(windowWidth / width, windowHeight / height)
+  
+	  $('#hijo').css({
+		'-webkit-transform': 'scale(' + r + ')',
+		'-moz-transform': 'scale(' + r + ')',
+		'-ms-transform': 'scale(' + r + ')',
+		'-o-transform': 'scale(' + r + ')',
+		'transform': 'scale(' + r + ')'
+	  });
+  
+	});
+  </script>
